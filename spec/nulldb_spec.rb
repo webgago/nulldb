@@ -232,6 +232,11 @@ describe "NullDB" do
     Employee.connection.execute("blah").finish
   end
 
+  it "should #to_a return empty array on the result of #execute" do
+    Employee.connection.execute("blah").to_a.should be_a Array
+    Employee.connection.execute("blah").to_a.should be_empty
+  end
+
   def should_have_column(klass, col_name, col_type)
     col = klass.columns_hash[col_name.to_s]
     col.should_not be_nil
